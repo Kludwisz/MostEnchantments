@@ -1,3 +1,5 @@
+import finder.MaxSwordFinder;
+
 public class Main {
     public static void main(String[] args) {
         // EnchantFinder.findNEnchantSeeds(11);
@@ -6,5 +8,11 @@ public class Main {
 
         // MaxSwordFinder.graphSharpnessFromEffectiveLevel();
         // results -> sharpness_levels.txt
+        // MaxSwordFinder.printAERForLevel(45);
+        // conclusion: can't get a maxed-out sharpness sword from any chest,
+        // because we're always missing sweeping edge when level >= 45.
+
+        // MaxSwordFinder.findMaxSwordSeeds();
+        // results -> max_swords.txt
     }
 }

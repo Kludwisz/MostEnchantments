@@ -1,0 +1,12 @@
+11719531120793
+[(sharpness, 4), (looting, 3), (sweeping, 3), (unbreaking, 3), (knockback, 2), (fire_aspect, 2), (mending, 1)]
+122582799509215
+[(bane_of_arthropods, 5), (unbreaking, 3), (looting, 3), (sweeping, 3), (knockback, 2), (fire_aspect, 2), (mending, 1)]
+101675570559389
+[(sharpness, 4), (unbreaking, 3), (looting, 3), (sweeping, 3), (knockback, 2), (fire_aspect, 2), (mending, 1)]
+241742339097970
+[(sharpness, 4), (looting, 3), (sweeping, 3), (unbreaking, 3), (knockback, 2), (fire_aspect, 2), (mending, 1)]
+113671614640449
+[(smite, 5), (sweeping, 3), (looting, 3), (unbreaking, 3), (fire_aspect, 2), (knockback, 2), (mending, 1)]
+31862010966927
+[(sharpness, 4), (looting, 3), (unbreaking, 3), (sweeping, 3), (fire_aspect, 2), (knockback, 2), (mending, 1)]

@@ -3,10 +3,12 @@ package finder;
 import com.seedfinding.latticg.reversal.DynamicProgram;
 import com.seedfinding.latticg.reversal.calltype.java.JavaCalls;
 import com.seedfinding.latticg.util.LCG;
+import com.seedfinding.mccore.util.data.Pair;
 import com.seedfinding.mccore.version.MCVersion;
 import com.seedfinding.mcfeature.loot.LootContext;
 import com.seedfinding.mcfeature.loot.LootPool;
 import com.seedfinding.mcfeature.loot.LootTable;
+import com.seedfinding.mcfeature.loot.enchantment.EnchantmentInstance;
 import com.seedfinding.mcfeature.loot.enchantment.Enchantments;
 import com.seedfinding.mcfeature.loot.entry.EmptyEntry;
 import com.seedfinding.mcfeature.loot.entry.ItemEntry;
@@ -17,12 +19,11 @@ import com.seedfinding.mcfeature.loot.item.ItemStack;
 import com.seedfinding.mcfeature.loot.item.Items;
 import com.seedfinding.mcfeature.loot.roll.ConstantRoll;
 
+import java.util.HashMap;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class MaxSwordFinder {
-    // maxed-out smite sword loot seed
-    // 76343060228305
-    // ItemStack{item=Item{name='diamond_sword', enchantments=[(smite, 5), (unbreaking, 3), (sweeping, 3), (looting, 3), (mending, 1), (knockback, 2), (fire_aspect, 2)], effects=[]}, count=1}
 
     public static void graphSharpnessFromEffectiveLevel() {
         EnchantWithLevelsFunction fun = new EnchantWithLevelsFunction(Items.DIAMOND_SWORD, 20, 39);
@@ -38,9 +39,21 @@ public class MaxSwordFinder {
         }
     }
 
+    public static void printAERForLevel(int effectiveLevel) {
+        EnchantWithLevelsFunction fun = new EnchantWithLevelsFunction(Items.DIAMOND_SWORD, 20, 39);
+        fun.applyEnchantment(Enchantments.getFor(MCVersion.v1_16_1));
+        var aer = fun.getAvailableEnchantmentResults(effectiveLevel);
+        for (var enchantment : aer) {
+            System.out.println(enchantment.getName() + " " + enchantment.getLevel());
+        }
+    }
+
     // ----------------------------------------------------------------------
 
-    public static void findSmiteSwordSeeds() {
+    // maxed-out smite sword loot seed
+    // 76343060228305
+    // ItemStack{item=Item{name='diamond_sword', enchantments=[(smite, 5), (unbreaking, 3), (sweeping, 3), (looting, 3), (mending, 1), (knockback, 2), (fire_aspect, 2)], effects=[]}, count=1}
+    public static void findMaxSwordSeeds() {
         DynamicProgram device = DynamicProgram.create(LCG.JAVA);
 
         // skip random level
@@ -50,8 +63,11 @@ public class MaxSwordFinder {
         device.skip(2);
 
         // very good amplifier
-        device.add(JavaCalls.nextFloat().betweenII(0.9f, 1.0f));
-        device.add(JavaCalls.nextFloat().betweenII(0.9f, 1.0f));
+        //device.add(JavaCalls.nextFloat().betweenII(0.9f, 1.0f));
+        //device.add(JavaCalls.nextFloat().betweenII(0.9f, 1.0f));
+
+        // any amplifier
+        device.skip(2);
 
         // guaranteed enchantment
         device.skip(1);
@@ -70,20 +86,38 @@ public class MaxSwordFinder {
             fun.process(sword, ctx);
             if (sword.getItem().getEnchantments().size() >= 7) {
                 synchronized (System.out) {
-                    boolean smite = false;
+                    boolean goodEnchant = false;
                     for (var ench : sword.getItem().getEnchantments()) {
-                        if (ench.getFirst().equals("smite") && ench.getSecond() == 5) smite = true;
+                        if (ench.getFirst().equals("sharpness") && ench.getSecond() == 4) goodEnchant = true;
+                        if (ench.getFirst().equals("bane_of_arthropods") && ench.getSecond() == 5) goodEnchant = true;
+                        if (ench.getFirst().equals("smite") && ench.getSecond() == 5) goodEnchant = true;
                         if (ench.getFirst().equals("vanishing_curse")) return;
                     }
-                    if (!smite) return;
+                    if (!goodEnchant) return;
 
                     // System.out.println(seed);
                     // test if we can get it from chest
                     ctx.setSeed(seed, false);
                     ctx.advance(-2);
 
-                    System.out.println(ctx.getSeed());
-                    END_CITY_TREASURE_CHEST_KINDA.get().generate(ctx).forEach(System.out::println);
+                    final long lootSeed = ctx.getSeed() ^ LCG.JAVA.multiplier;
+                    END_CITY_TREASURE_CHEST_KINDA.get().generate(ctx).forEach(itemStack -> {
+                        if (itemStack.getItem().equalsName(Items.DIAMOND_SWORD)) {
+                            // check enchantment order
+                            for (int i = 0; i < itemStack.getItem().getEnchantments().size() - 1; i++) {
+                                var ench = itemStack.getItem().getEnchantments().get(i);
+                                var enchNext = itemStack.getItem().getEnchantments().get(i + 1);
+
+                                if (ench.getSecond() < enchNext.getSecond())
+                                    return;
+//                                if (ench.getSecond().equals(enchNext.getSecond()) && getInGameLength(ench) < getInGameLength(enchNext))
+//                                    return;
+                            }
+
+                            System.out.println(lootSeed);
+                            System.out.println(itemStack.getItem().getEnchantments());
+                        }
+                    });
 
 //                    for (var ench : sword.getItem().getEnchantments()) {
 //                        System.out.println(ench.getFirst() + " " + ench.getSecond());
@@ -96,14 +130,10 @@ public class MaxSwordFinder {
         });
     }
 
-    public static void findSharpnessSwordSeeds() {
-
-    }
-
     // ----------------------------------------------------------------------
 
     private static final Supplier<LootTable> END_CITY_TREASURE_CHEST_KINDA = () -> new LootTable(
-            // simulate uniform roll
+            // simulate uniform roll without adding any items to the loot table
             new LootPool(new ConstantRoll(1), new EmptyEntry(1), new EmptyEntry(1)),
 
             new LootPool(new ConstantRoll(1),
@@ -132,4 +162,16 @@ public class MaxSwordFinder {
                     new ItemEntry(Items.IRON_SHOVEL, 3).apply(version -> new EnchantWithLevelsFunction(Items.IRON_SHOVEL, 20, 39, true).apply(version))
             )
     );
+
+    private static int getInGameLength(Pair<String, Integer> ench) {
+        int len = ench.getFirst().length();
+        if (ench.getFirst().equals("sweeping"))
+            len = "sweeping_edge".length();
+
+        if (ench.getSecond() == 3) len += 3;
+        if (ench.getSecond() == 2 || ench.getSecond() == 4) len += 2;
+        if (ench.getSecond() == 1 || ench.getSecond() == 5) len += 1;
+
+        return len;
+    }
 }

@@ -1,4 +1,4 @@
-package booksources;
+package enchantsources;
 
 public class StrongholdChests {
 }
