@@ -8,7 +8,6 @@ import com.seedfinding.mccore.version.MCVersion;
 import com.seedfinding.mcfeature.loot.LootContext;
 import com.seedfinding.mcfeature.loot.LootPool;
 import com.seedfinding.mcfeature.loot.LootTable;
-import com.seedfinding.mcfeature.loot.enchantment.EnchantmentInstance;
 import com.seedfinding.mcfeature.loot.enchantment.Enchantments;
 import com.seedfinding.mcfeature.loot.entry.EmptyEntry;
 import com.seedfinding.mcfeature.loot.entry.ItemEntry;
@@ -19,7 +18,6 @@ import com.seedfinding.mcfeature.loot.item.ItemStack;
 import com.seedfinding.mcfeature.loot.item.Items;
 import com.seedfinding.mcfeature.loot.roll.ConstantRoll;
 
-import java.util.HashMap;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")

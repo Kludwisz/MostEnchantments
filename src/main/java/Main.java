@@ -1,4 +1,7 @@
+import enchantsources.EndCityChest;
 import finder.MaxSwordFinder;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,5 +17,19 @@ public class Main {
 
         // MaxSwordFinder.findMaxSwordSeeds();
         // results -> max_swords.txt
+
+        findEndCity();
+        // results -> world_seeds.txt
+    }
+
+    private static void findEndCity() {
+        List.of(
+                122582799509215L,   // bane of arthropods
+                113671614640449L,   // smite
+                31862010966927L     // sharpness
+        ).forEach(lootSeed -> {
+            EndCityChest endCityChest = new EndCityChest(lootSeed);
+            endCityChest.findWorldSeeds();
+        });
     }
 }

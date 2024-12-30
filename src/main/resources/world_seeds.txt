@@ -1,0 +1,16 @@
+
+--------------------------------------------------------------------------
+ Maxed-out diamond swords in end city chest (MC Java Edition 1.16 - 1.17)
+--------------------------------------------------------------------------
+    Bane of Arthropods sword:   Seed: 268570221138323  /tp 1617 62 -603
+    Bane of Arthropods sword:   Seed: 50340244466659  /tp 1659 62 -239
+    Bane of Arthropods sword:   Seed: 159191903003027  /tp 1655 95 395
+    Bane of Arthropods sword:   Seed: 41492283477107  /tp 1680 127 -637
+    Bane of Arthropods sword:   Seed: 78632144867891  /tp 1700 111 -622
+    Bane of Arthropods sword:   Seed: 119816896801411  /tp 1698 126 -575
+    Smite sword:                Seed: 148503243478328  /tp 1740 110 -589
+    Sharpness sword:            Seed: 219778961814480  /tp 1675 66 65
+    Sharpness sword:            Seed: 170595579137936  /tp 1690 117 48
+    Sharpness sword:            Seed: 106602437653104  /tp 1705 98 386
+    Sharpness sword:            Seed: 100174066995472  /tp 1763 115 -606
+------------------------------------------------------------------------
