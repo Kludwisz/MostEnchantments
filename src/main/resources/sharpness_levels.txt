@@ -1,0 +1,6 @@
+effective level  |  sharpness level
+1  - 11          |  1
+12 - 22          |  2
+23 - 33          |  3
+34 - 44          |  4
+45+              |  5

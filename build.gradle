@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://maven.seedfinding.com" }
+    maven { url "https://maven.latticg.com/" }
+    maven { url "https://repo.jellejurre.dev" }
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation('com.seedfinding:mc_math:1.171.0') { transitive = false }
+    implementation('com.seedfinding:mc_seed:1.171.1') { transitive = false }
+    implementation('com.seedfinding:mc_core:1.210.0') { transitive = false }
+    implementation('com.seedfinding:mc_noise:1.171.1') { transitive = false }
+
+    implementation('com.seedfinding:mc_biome:1.171.1') { transitive = false }
+    implementation('com.seedfinding:mc_terrain:1.171.1') { transitive = false }
+    implementation('com.seedfinding:mc_reversal:1.171.1') { transitive = false }
+    implementation('com.seedfinding:mc_feature:1.171.9') { transitive = false }
+
+    implementation 'com.seedfinding:latticg:1.07@jar'
+
+    //implementation 'com.github.DuncanRuns:MiLTSU:2a34ca356e'
+    implementation('com.github.jellejurre:seed-checker:1.2.0-1.16.1') { transitive = false }
+    // implementation 'com.github.KalleStruik:noise-sampler:1.20.0'
+}
