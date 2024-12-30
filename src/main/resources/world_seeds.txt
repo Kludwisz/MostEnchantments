@@ -1,7 +1,15 @@
+--------------------------------------------------------------------------
+ 11-enchantment book in Jungle Temple chest (MC Java Edition 1.16 - 1.17)
+--------------------------------------------------------------------------
+    Seed: 55323130350369567     /execute in minecraft:overworld run tp @s 259 60 -216
+    Seed: 56175729357415215     /execute in minecraft:overworld run tp @s -184 67 19
+    Seed: 150652981288550877    /execute in minecraft:overworld run tp @s 75 66 8
+    Seed: 167405026417094081    /execute in minecraft:overworld run tp @s -156 70 -263
+--------------------------------------------------------------------------
+
 
 --------------------------------------------------------------------------
- Enchantments in End Cities:
- Maxed-out diamond swords in end city chest (MC Java Edition 1.16 - 1.17)
+ Maxed-out diamond sword in End City chest (MC Java Edition 1.16 - 1.17)
 --------------------------------------------------------------------------
     Bane of Arthropods sword:   Seed: 268570221138323  /tp 1617 62 -603
     Bane of Arthropods sword:   Seed: 50340244466659  /tp 1659 62 -239

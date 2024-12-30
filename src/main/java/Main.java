@@ -1,5 +1,8 @@
+import com.seedfinding.mccore.rand.ChunkRand;
+import com.seedfinding.mccore.util.pos.CPos;
+import com.seedfinding.mccore.version.MCVersion;
 import enchantsources.EndCityChest;
-import finder.MaxSwordFinder;
+import enchantsources.JungleTempleChest;
 
 import java.util.List;
 
@@ -19,8 +22,11 @@ public class Main {
         // MaxSwordFinder.findMaxSwordSeeds();
         // results -> max_swords.txt
 
-        findEndCity();
-        // results -> world_seeds.txt | Enchantments in End Cities
+        // findEndCity();
+        // results -> world_seeds.txt
+
+        // findJungleTemple();
+        // results -> world_seeds.txt
     }
 
     private static void findEndCity() {
@@ -32,6 +38,14 @@ public class Main {
         .forEach(lootSeed -> {
             EndCityChest endCityChest = new EndCityChest(lootSeed);
             endCityChest.findWorldSeeds();
+        });
+    }
+
+    private static void findJungleTemple() {
+        JungleTempleChest.getValidLootSeedsFromFile("seeds_11.txt")
+        .forEach(lootSeed -> {
+            JungleTempleChest jungleTempleChest = new JungleTempleChest(lootSeed);
+            jungleTempleChest.findWorldSeeds();
         });
     }
 }
