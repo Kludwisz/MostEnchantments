@@ -1,8 +1,8 @@
-import com.seedfinding.mccore.rand.ChunkRand;
-import com.seedfinding.mccore.util.pos.CPos;
 import com.seedfinding.mccore.version.MCVersion;
+import com.seedfinding.mcfeature.loot.enchantment.Enchantments;
 import enchantsources.EndCityChest;
 import enchantsources.JungleTempleChest;
+import enchantsources.StrongholdChests;
 
 import java.util.List;
 
@@ -27,6 +27,8 @@ public class Main {
 
         // findJungleTemple();
         // results -> world_seeds.txt
+
+        findStrongholdLootSeeds();
     }
 
     private static void findEndCity() {
@@ -47,5 +49,40 @@ public class Main {
             JungleTempleChest jungleTempleChest = new JungleTempleChest(lootSeed);
             jungleTempleChest.findWorldSeeds();
         });
+    }
+
+    private static void findStrongholdLootSeeds() {
+        List.of(
+                StrongholdChests.LIBRARY_ONE_ITEM,
+                StrongholdChests.CORRIDOR_ONE_ITEM,
+                StrongholdChests.CROSSING_ONE_ITEM
+        )
+        .forEach(table -> {
+            System.out.println("------------------------------------");
+            StrongholdChests.getLootSeedsForLootTable("seeds_11.txt", table.get()).forEach(System.out::println);
+        });
+    }
+
+    private static void printEnchantmentOrders() {
+        MCVersion[] versions = {
+                MCVersion.v1_13,
+                MCVersion.v1_14,
+                MCVersion.v1_15,
+                MCVersion.v1_16,
+                MCVersion.v1_17,
+                MCVersion.v1_18,
+                MCVersion.v1_19,
+                MCVersion.v1_20,
+                MCVersion.v1_21
+        };
+
+        for (MCVersion version : versions) {
+            System.out.println("------------------------------------");
+            System.out.println(version);
+            Enchantments.getFor(version).forEach(enchantment -> {
+                System.out.println(enchantment.getName());
+            });
+            System.out.println();
+        }
     }
 }

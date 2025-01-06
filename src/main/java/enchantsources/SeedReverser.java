@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeedReverser {
-    private final CPos chunkMin;
-    private final CPos chunkMax;
+    protected final CPos chunkMin;
+    protected final CPos chunkMax;
 
-    private int featureSalt = 0;
-    private MCVersion version = MCVersion.v1_16_1;
+    protected int featureSalt = 0;
+    protected MCVersion version = MCVersion.v1_16_1;
 
     /**
      * Creates a chunk-area-bounded SeedReverser.
