@@ -28,7 +28,10 @@ public class Main {
         // findJungleTemple();
         // results -> world_seeds.txt
 
-        findStrongholdLootSeeds();
+        // findStrongholdLootSeeds();
+        // results -> stronghold_loot_seeds.txt
+
+        findStronghold();
     }
 
     private static void findEndCity() {
@@ -62,6 +65,12 @@ public class Main {
             StrongholdChests.getLootSeedsForLootTable("seeds_11.txt", table.get()).forEach(System.out::println);
         });
     }
+
+    private static void findStronghold() {
+        StrongholdChests.findCorridorChest(152519012265730L);
+    }
+
+    // ------------------------------------------------------------------------------------------
 
     private static void printEnchantmentOrders() {
         MCVersion[] versions = {

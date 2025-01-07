@@ -22,8 +22,16 @@ import java.util.function.Supplier;
 public class StrongholdChests {
 
     public static void findCorridorChest(long lootSeed) {
+        // make sure this is a good loot seed
+
+        Items.ENCHANTED_BOOK.getEnchantments().clear();
+        CORRIDOR_ONE_ITEM.get().generate(new LootContext(lootSeed)).forEach(is -> {
+            if (is.getItem().getEnchantments().size() < 11)
+                System.err.println("Invalid loot seed!!!");
+        });
+
         StrongholdSeedReverser reverser = new StrongholdSeedReverser()
-                .withTargetResultCount(2000)
+                .withTargetResultCount(1000)
                 .withFeatureSalt(50000);
 
         var results = reverser.reverseCorridorLootSeed(lootSeed);

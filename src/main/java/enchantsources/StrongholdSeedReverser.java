@@ -26,8 +26,8 @@ public class StrongholdSeedReverser extends SeedReverser {
 
     public StrongholdSeedReverser() {
         this(
-                new BPos(-2800, 0, -2800).toChunkPos(),
-                new BPos(2800, 0, 2800).toChunkPos()
+                new BPos(-2500, 0, -2500).toChunkPos(),
+                new BPos(2500, 0, 2500).toChunkPos()
         );
     }
 
@@ -70,6 +70,9 @@ public class StrongholdSeedReverser extends SeedReverser {
         long popseed = ChunkRandomReverser.reverseDecoratorSeed(decoratorSeed, featureSalt % 10000, featureSalt / 10000, version);
 
         ArrayList<Pair<Long, CPos>> results = new ArrayList<>();
+        final int increment = Math.max(targetResultCount / 100, 1);
+        int nextPercent = increment;
+        int percent = 0;
 
         for (int cx = chunkMin.getX(); cx <= chunkMax.getX(); cx++) {
             for (int cz = chunkMin.getZ(); cz <= chunkMax.getZ(); cz++) {
@@ -80,22 +83,30 @@ public class StrongholdSeedReverser extends SeedReverser {
                 final int bx = cx << 4;
                 final int bz = cz << 4;
                 ChunkRandomReverser.reversePopulationSeed(popseed, bx, bz, version)
-                        .stream().map(seed -> new Pair<>(seed, chunkPos))
+                        .stream().parallel().map(seed -> new Pair<>(seed, chunkPos))
                         .forEach(pair -> {
                             Stronghold sh = new Stronghold(version);
                             BiomeSource obs = BiomeSource.of(Dimension.OVERWORLD, version, pair.getFirst());
-                            CPos[] strongholds = sh.getStarts(obs, 3, new JRand(0));
+                            CPos[] strongholds = sh.getStarts(obs, 1, new JRand(0));
 
                             for (CPos stronghold : strongholds) {
-                                if (stronghold.distanceTo(chunkPos, DistanceMetric.CHEBYSHEV) <= 5) {
-                                    results.add(pair);
-                                    break;
+                                //System.out.println("check" + stronghold);
+                                if (stronghold.distanceTo(chunkPos, DistanceMetric.CHEBYSHEV) <= 7) {
+                                    synchronized (results) {
+                                        results.add(pair);
+                                    }
                                 }
                             }
                         });
 
                 if (results.size() >= targetResultCount)
                     return results;
+
+                if (results.size() >= nextPercent) {
+                    percent++;
+                    nextPercent += increment;
+                    System.out.println("results: " + results.size() + " / " + targetResultCount + ", " + percent + "% done");
+                }
             }
         }
 
@@ -106,8 +117,8 @@ public class StrongholdSeedReverser extends SeedReverser {
         long x = pos.getX();
         long z = pos.getZ();
         long dist = x*x + z*z;
-        final long a = 1300 / 16;
-        final long b = 2800 / 16;
+        final long a = 1400 / 16;
+        final long b = 2600 / 16;
         return a * a < dist && dist < b * b;
     }
 }
