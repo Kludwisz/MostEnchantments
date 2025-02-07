@@ -1,7 +1,7 @@
 # MostEnchantments
 A repository for the code I used to find the seeds in this video: [TODO link]()
 <br>
-You can find all the world seeds in `src/main/resources/world_seeds.txt`, 
+You can find all the world seeds right below, 
 and some other intermediate results in other files under `src/main/resources/`.
 
 ## How to run
