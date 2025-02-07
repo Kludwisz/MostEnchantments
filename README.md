@@ -42,7 +42,7 @@ and some other intermediate results in other files under `src/main/resources/`.
 ### End Cities
 `110436288705937` (Bane of Arthropods)
 ```
-/execute in minecraft:the_end run tp @s 1625 144 ????
+/execute in minecraft:the_end run tp @s 1625 144 92
 ```
 `169471947180294` (Smite)
 ```
