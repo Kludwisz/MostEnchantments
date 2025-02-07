@@ -6,13 +6,12 @@ and some other intermediate results in other files under `src/main/resources/`.
 
 ## Seeds (MC 1.17 and below)
 ### Jungle Temples
+`55323130350369567` ``` 
+/execute in minecraft:overworld run tp @s 259 60 -216 ```
+`56175729357415215`
 ```
-55323130350369567
-```     
+/execute in minecraft:overworld run tp @s -184 67 19
 ```
-/execute in minecraft:overworld run tp @s 259 60 -216
-```
-```56175729357415215```     ```/execute in minecraft:overworld run tp @s -184 67 19```
 ```150652981288550877```    ```/execute in minecraft:overworld run tp @s 75 66 8```
 ```167405026417094081```    ```/execute in minecraft:overworld run tp @s -156 70 -263```
 ### Strongholds
