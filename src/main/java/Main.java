@@ -1,3 +1,4 @@
+import com.seedfinding.mccore.rand.ChunkRand;
 import com.seedfinding.mccore.version.MCVersion;
 import com.seedfinding.mcfeature.loot.enchantment.Enchantments;
 import enchantsources.EndCityChest;
@@ -8,6 +9,10 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Main {
+    /**
+     * Here you can find all the methods that were used to generate the results,
+     * as well as comments and references to the files where the results are stored.
+     */
     public static void main(String[] args) {
         // EnchantFinder.findNEnchantSeeds(11);
         // EnchantFinder.findNEnchantSeeds(12);
@@ -31,7 +36,11 @@ public class Main {
         // findStrongholdLootSeeds();
         // results -> stronghold_loot_seeds.txt
 
-        findStronghold();
+        // findStronghold();
+        // results -> world_seeds.txt
+
+        // jungleTempleDemo();
+        // 60 -> bone, 85 -> golden horse armor, 46 -> bone
     }
 
     private static void findEndCity() {
@@ -88,10 +97,23 @@ public class Main {
         for (MCVersion version : versions) {
             System.out.println("------------------------------------");
             System.out.println(version);
-            Enchantments.getFor(version).forEach(enchantment -> {
-                System.out.println(enchantment.getName());
-            });
+            Enchantments.getFor(version).forEach(enchantment -> System.out.println(enchantment.getName()));
             System.out.println();
+        }
+    }
+
+    private static void jungleTempleDemo() {
+        long[] seeds12 = {
+                256209145405483L,
+                200022975719621L,
+                230423166549507L
+        };
+
+        for (long seed : seeds12) {
+            ChunkRand rand = new ChunkRand();
+            rand.setSeed(seed, false);
+            rand.advance(-1);
+            System.out.println(seed + " " + rand.nextInt(88));
         }
     }
 }

@@ -23,7 +23,5 @@ dependencies {
 
     implementation 'com.seedfinding:latticg:1.07@jar'
 
-    //implementation 'com.github.DuncanRuns:MiLTSU:2a34ca356e'
     implementation('com.github.jellejurre:seed-checker:1.2.0-1.16.1') { transitive = false }
-    // implementation 'com.github.KalleStruik:noise-sampler:1.20.0'
 }
