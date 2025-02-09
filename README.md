@@ -1,8 +1,8 @@
 # MostEnchantments
-A repository for the code I used to find the seeds in this video: [TODO link]()
+A repository for the code I used to find the seeds in [this video](https://youtu.be/dP5okjL3AzE).
 <br>
 You can find all the world seeds right below, 
-and some other intermediate results in other files under `src/main/resources/`.
+and some other intermediate results in `src/main/resources/`.
 
 ## Seeds & TP commands (only MC JE 1.17 and below)
 ### Jungle Temples
